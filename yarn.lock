@@ -1199,6 +1199,18 @@ micromatch@^4.0.4:
     braces "^3.0.1"
     picomatch "^2.2.3"
 
+minecraft-motd-util@^1.1.9:
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/minecraft-motd-util/-/minecraft-motd-util-1.1.12.tgz#b1e3627329a770c015e5c32261510eb9ff0a2f81"
+  integrity sha512-5TuTRjrRupSTruea0nRC37r0FdhkS1O4wIJKAYfwJRCQd/X4Zyl/dVIs96h9UVW6N8jhIuz9pNkrDsqyN7VBdA==
+
+minecraft-server-util@^5.2.9:
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/minecraft-server-util/-/minecraft-server-util-5.2.9.tgz#01b2dfd91c0cfa9bafab9995885b07793c68db39"
+  integrity sha512-MLaST5JnTlutO8++8FRa4RBck2EM4QMfkdkJ8b4LsjSTHtZQihD/zma2Bks9weEJnH3Q0xWmb5wLScv/UNDQyg==
+  dependencies:
+    minecraft-motd-util "^1.1.9"
+
 minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"

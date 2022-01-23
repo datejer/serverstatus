@@ -1,11 +1,11 @@
 import { splitAddress } from "./address";
-import { status, queryFull, statusBedrock } from "minecraft-server-util";
+import { status, queryFull, statusBedrock, statusLegacy } from "minecraft-server-util";
 import { BedrockServer, MinecraftServer } from "../types/types";
 
 const getServerInfo = async (address: string): Promise<MinecraftServer> => {
   const { host, port } = splitAddress(address);
 
-  let s, q;
+  let s, q, l;
 
   try {
     s = await status(host, port);
@@ -19,28 +19,43 @@ const getServerInfo = async (address: string): Promise<MinecraftServer> => {
     q = null;
   }
 
+  if (!s) {
+    try {
+      l = await statusLegacy(host, port);
+    } catch (error) {
+      l = null;
+    }
+  } else {
+    l = null;
+  }
+
   return {
-    online: !!s || !!q,
-    host: s?.srvRecord?.host || host,
+    online: !!s || !!q || !!l,
+    host: s?.srvRecord?.host || l?.srvRecord?.host || host,
     ip: q?.hostIP || null,
-    port: q?.hostPort || s?.srvRecord?.port || port || null,
-    version: q?.version || s?.version?.name || null,
-    protocol: s?.version?.protocol || null,
+    port: q?.hostPort || s?.srvRecord?.port || l?.srvRecord?.port || port || null,
+    version: q?.version || s?.version?.name || l?.version?.name || null,
+    protocol: s?.version?.protocol || l?.version?.protocol || null,
     software: q?.software || s?.version?.name || null,
     plugins: q?.plugins || [],
     map: q?.map || null,
     motd: {
-      raw: q?.motd?.raw || s?.motd?.raw || null,
-      clean: q?.motd?.clean || s?.motd?.clean || null,
-      html: q?.motd?.html || s?.motd?.html || null,
+      raw: q?.motd?.raw || s?.motd?.raw || l?.motd?.raw || null,
+      clean: q?.motd?.clean || s?.motd?.clean || l?.motd?.clean || null,
+      html: q?.motd?.html || s?.motd?.html || l?.motd?.html || null,
     },
     favicon: s?.favicon || null,
     players: {
-      online: q?.players?.online || s?.players?.online || 0,
-      max: q?.players?.max || s?.players?.max || 0,
+      online: q?.players?.online || s?.players?.online || l?.players?.online || 0,
+      max: q?.players?.max || s?.players?.max || l?.players?.max || 0,
       list: s?.players?.sample || q?.players?.list || [],
     },
     ping: s?.roundTripLatency || null,
+    debug: {
+      status: !!s,
+      query: !!q,
+      legacy: !!l,
+    },
   };
 };
 

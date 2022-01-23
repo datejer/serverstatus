@@ -20,6 +20,11 @@ export type MinecraftServer = {
     list: string[] | { name: string; id: string }[];
   };
   ping: number | null;
+  debug: {
+    status: boolean;
+    query: boolean;
+    legacy: boolean;
+  };
 };
 
 export type BedrockServer = {

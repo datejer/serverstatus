@@ -1265,6 +1265,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+next-themes@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.0.15.tgz#ab0cee69cd763b77d41211f631e108beab39bf7d"
+  integrity sha512-LTmtqYi03c4gMTJmWwVK9XkHL7h0/+XrtR970Ujvtu3s0kZNeJN24aJsi4rkZOI8i19+qq6f8j+8Duwy5jqcrQ==
+
 next@12.0.8:
   version "12.0.8"
   resolved "https://registry.npmjs.org/next/-/next-12.0.8.tgz"
@@ -1644,6 +1649,11 @@ source-map@^0.6.1:
   version "0.6.1"
   resolved "https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+
+status-indicator@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/status-indicator/-/status-indicator-1.0.9.tgz#d802ae5b53e432d4a36d9b0f195fe1049385ac37"
+  integrity sha512-xaUIXfWA++prLDv49U2xrcIJAMKb0djfpjDc4aApW+bDIx9HzI26CHWKEoAp/DuvUlyPwBj4Q5VURntV9qa71A==
 
 stream-browserify@3.0.0:
   version "3.0.0"

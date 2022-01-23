@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { MinecraftServer, Error } from "../../types/types";
-import { getServerInfo } from "../../lib/server";
+import { Error, BedrockServer } from "../../../types/types";
+import { getBedrockServerInfo } from "../../../lib/server";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<MinecraftServer | Error>,
+  res: NextApiResponse<BedrockServer | Error>,
 ) {
   const { address } = req.query;
 
@@ -14,7 +14,7 @@ export default async function handler(
     return res.json({ error: true, message: "Please input a valid address." });
   }
 
-  const server = await getServerInfo(address);
+  const server = await getBedrockServerInfo(address);
 
   res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=90");
 

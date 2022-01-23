@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -9,6 +10,13 @@ import Icon from "../public/favicon.png";
 
 const Home: NextPage = () => {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  const handleThemeChange = () => {
+    theme === "dark" ? setTheme("light") : setTheme("dark");
+  };
 
   return (
     <div className={styles.container}>
@@ -74,12 +82,20 @@ const Home: NextPage = () => {
       </main>
 
       <footer className={styles.footer}>
-        <button
-          className={styles.themeSwitch}
-          onClick={() => (theme === "dark" ? setTheme("light") : setTheme("dark"))}
-        >
-          {theme === "dark" ? "🌞" : "🌙"}
-        </button>
+        {mounted ? (
+          <button
+            aria-pressed={theme === "dark"}
+            className={styles.themeSwitch}
+            onClick={handleThemeChange}
+          >
+            <span aria-hidden="true">{theme === "dark" ? "🌞" : "🌙"}</span>
+            <span data-visually-hidden>
+              {theme === "dark" ? "Dark theme enabled" : "White theme enabled"}
+            </span>
+          </button>
+        ) : (
+          <button className={styles.themeSwitch}>🌞</button>
+        )}
         <a href="https://github.com/datejer" target="_blank" rel="noopener noreferrer">
           Made by <span className={styles.name}>ejer</span>
         </a>

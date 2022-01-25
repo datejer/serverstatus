@@ -17,7 +17,7 @@ export type MinecraftServer = {
   players: {
     online: number;
     max: number;
-    list: string[] | { name: string; id: string }[];
+    list: { name: string; id: string | null }[];
   };
   ping: number | null;
   debug: {

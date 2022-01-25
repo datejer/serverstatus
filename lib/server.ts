@@ -7,27 +7,15 @@ const getServerInfo = async (address: string): Promise<MinecraftServer> => {
 
   let s, q, l;
 
-  try {
-    s = await status(host, port);
-  } catch (error) {
-    s = null;
-  }
+  const res = await Promise.allSettled([
+    status(host, port),
+    queryFull(host, port),
+    statusLegacy(host, port),
+  ]);
 
-  try {
-    q = await queryFull(host, port);
-  } catch (error) {
-    q = null;
-  }
-
-  if (!s) {
-    try {
-      l = await statusLegacy(host, port);
-    } catch (error) {
-      l = null;
-    }
-  } else {
-    l = null;
-  }
+  res[0].status === "fulfilled" && (s = res[0].value);
+  res[1].status === "fulfilled" && (q = res[1].value);
+  res[2].status === "fulfilled" && (l = res[2].value);
 
   return {
     online: !!s || !!q || !!l,
@@ -48,13 +36,18 @@ const getServerInfo = async (address: string): Promise<MinecraftServer> => {
     players: {
       online: q?.players?.online || s?.players?.online || l?.players?.online || 0,
       max: q?.players?.max || s?.players?.max || l?.players?.max || 0,
-      list: s?.players?.sample || q?.players?.list || [],
+      list:
+        s?.players?.sample ||
+        q?.players?.list.map((p) => {
+          return { name: p, id: null };
+        }) ||
+        [],
     },
     ping: s?.roundTripLatency || null,
     debug: {
       status: !!s,
       query: !!q,
-      legacy: !!l,
+      legacy: !s && !!l,
     },
   };
 };

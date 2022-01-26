@@ -36,8 +36,11 @@ const Home: NextPage = () => {
         <section className={styles.section}>
           <p className={styles.about}>
             Get all the information about a Minecraft server (status & query) in the form of JSON.
-            Every response returns the same consistent object structure (unless it&apos;s an error).
-            If a value is missing or could not be fetched it returns{" "}
+            Every response returns the same consistent{" "}
+            <a href="https://github.com/datejer/serverstatus/blob/main/types/types.ts">
+              object structure
+            </a>{" "}
+            (unless it&apos;s an error). If a value is missing or could not be fetched it returns{" "}
             <code className={styles.inlineCode}>null</code>.
           </p>
           <p className={styles.about}>

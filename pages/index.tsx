@@ -18,6 +18,8 @@ const Home: NextPage = () => {
     theme === "dark" ? setTheme("light") : setTheme("dark");
   };
 
+  const domain = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+
   return (
     <div className={styles.container}>
       <SEO />
@@ -62,7 +64,9 @@ const Home: NextPage = () => {
         <section className={styles.section}>
           <h2 className={styles.subtitle}>Java</h2>
           <div style={{ display: "grid" }}>
-            <code className={styles.code}>curl https://server.mojan.ga/api/{`\<address\>`}</code>
+            <code className={styles.code}>
+              curl https://{domain}/api/{`\<address\>`}
+            </code>
           </div>
           <br />
           <Link href={"/api/server.dogcraft.net"}>
@@ -74,7 +78,7 @@ const Home: NextPage = () => {
           <h2 className={styles.subtitle}>Bedrock</h2>
           <div style={{ display: "grid" }}>
             <code className={styles.code}>
-              curl https://server.mojan.ga/api/bedrock/{`\<address\>`}
+              curl https://{domain}/api/bedrock/{`\<address\>`}
             </code>
           </div>
           <br />

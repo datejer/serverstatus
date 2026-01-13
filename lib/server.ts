@@ -44,6 +44,7 @@ const getServerInfo = async (address: string): Promise<MinecraftServer> => {
         [],
     },
     ping: s?.roundTripLatency || null,
+    srv: s?.srvRecord || l?.srvRecord || null,
     debug: {
       status: !!s,
       query: !!q,

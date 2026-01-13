@@ -20,6 +20,10 @@ export type MinecraftServer = {
     list: { name: string; id: string | null }[];
   };
   ping: number | null;
+  srv: {
+    host: string;
+    port: number;
+  } | null;
   debug: {
     status: boolean;
     query: boolean;
